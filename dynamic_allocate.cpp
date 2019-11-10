@@ -22,6 +22,6 @@ int main(){
 		var3[i] = new int[4];
 
 	for(int i=0 ; i<3 ; i++)
-		delete [] var3[i];
+		delete var3[i];
 	delete [] var3;
 }
