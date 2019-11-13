@@ -7,6 +7,7 @@ private:
 
 public:
 	string();
+	string(char c);
 	string(char c, int n);
 	string(const char* str);
 	string(const string& str);
@@ -19,11 +20,24 @@ public:
 	int string_compare(string&) const;
 	string& assign(const string&);
 	string& assign(const char*);
+	char at(int) const;
+
+	string& insert(int, const string&);
+	string& insert(int, const char*);
+	string& insert(int, char);
+
+	string& erase(int, int);
 };
 
 string::string(){
 	s = NULL;
 	len = 0;
+}
+
+string::string(char c){
+	s = new char [1];
+	s[0] = c;
+	len = 1;
 }
 
 string::string(char c, int n){
@@ -146,6 +160,66 @@ string& string::assign(const string& str){
 	return *this;
 }
 
+char string::at(int i) const{
+	if(i >= 0 && i<len)
+		return s[i];
+	else
+		return 0;
+}
+
+string& string::insert(int loc, const string& str){
+	if(loc < 0 || loc > len)
+		return *this;
+
+	char* new_s;
+	new_s = s;
+	s = new char[len+str.len];
+	
+
+	for(int i=0 ; i<loc ; i++)
+		s[i] = new_s[i];
+
+	for(int i=len ; i>loc ; i--)
+		s[i + str.len - 1] = new_s[i-1];
+
+	for(int i=0 ; i<str.len ; i++)
+		s[i + loc] = str.s[i];
+
+	len += str.len;
+
+	std::cout << len << std::endl;
+	std::cout << s << std::endl;
+
+	delete new_s;
+
+	return *this;
+}
+
+string& string::insert(int loc, const char* str){
+	string temp(str);
+	
+	return insert(loc, temp);
+}
+
+string& string::insert(int loc, char c){
+	string temp(c);
+
+	return insert(loc, temp);
+}
+
+string& string::erase(int loc, int num){
+	char* new_s;
+
+	new_s = s;
+	s = new char [len - num];
+
+	for(int i=loc ; i<loc+num-1 ; i++){
+		s
+	}
+
+	delete new_s;
+}
+
 int main(){
 	string s1("hi");
 	string s2("hio");
@@ -157,6 +231,8 @@ int main(){
 
 	std::cout << s1.string_compare(s2) << std::endl;
 	std::cout << s1.add_string(s2) << std::endl;
+
+	s1.insert(0, "asdf");
 
 	return 0;
 }
