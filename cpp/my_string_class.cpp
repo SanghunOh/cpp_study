@@ -27,6 +27,8 @@ public:
 	string& insert(int, char);
 
 	string& erase(int, int);
+
+	void printstr() const;
 };
 
 string::string(){
@@ -187,8 +189,6 @@ string& string::insert(int loc, const string& str){
 
 	len += str.len;
 
-	std::cout << len << std::endl;
-	std::cout << s << std::endl;
 
 	delete new_s;
 
@@ -208,16 +208,20 @@ string& string::insert(int loc, char c){
 }
 
 string& string::erase(int loc, int num){
-	char* new_s;
+	if(num < 0 || loc < 0 || loc > len)
+		return *this;
 
-	new_s = s;
-	s = new char [len - num];
+	for(int i=loc+num ; i<len ; i++)
+		s[i-num] = s[i];
 
-	for(int i=loc ; i<loc+num-1 ; i++){
-		s
-	}
+	len -= num;
+	s[len] = '\0';
+	
+	return *this;
+}
 
-	delete new_s;
+void string::printstr() const{
+	std::cout << s << std::endl;
 }
 
 int main(){
@@ -233,6 +237,9 @@ int main(){
 	std::cout << s1.add_string(s2) << std::endl;
 
 	s1.insert(0, "asdf");
+	s1.printstr();
+	s1.erase(0, 4);
+	s1.printstr();
 
 	return 0;
 }
