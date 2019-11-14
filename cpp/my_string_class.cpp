@@ -29,6 +29,11 @@ public:
 	string& erase(int, int);
 
 	void printstr() const;
+	int find(int, string&) const;
+	int find(int, const char*)const;
+	int find(int, char) const;
+
+	int compare(const string& str) const;
 };
 
 string::string(){
@@ -224,6 +229,51 @@ void string::printstr() const{
 	std::cout << s << std::endl;
 }
 
+int string::find(int find_from, string& str) const{
+	int i, j;
+
+	if(str.len == 0)
+		return -1;
+
+	for(i=find_from ; i<len - str.len ; i++){
+		for(j=0 ; j<str.len ; j++){
+			if(s[i+j] != str.s[j])
+				break;
+		}
+		if(j == str.len)
+			return i;
+	}
+
+	return -1;
+}
+
+int string::find(int find_from, const char* str) const{
+	string temp(str);
+
+	return find(find_from, temp);
+}
+
+int string::find(int find_from, char c) const{
+	string temp(c);
+
+	return find(find_from, temp);
+}
+
+int string::compare(const string& str) const{
+	for(int i=0 ; i<std::min(len, str.len) ; i++){
+		if(s[i] > str.s[i])
+			return 1;
+		else if(s[i] < str.s[i])
+			return -1;
+	}
+	if(len == str.len)
+		return 0;
+	else if(len > str.len)
+		return 1;
+	else 
+		return -1;
+}
+
 int main(){
 	string s1("hi");
 	string s2("hio");
@@ -236,8 +286,9 @@ int main(){
 	std::cout << s1.string_compare(s2) << std::endl;
 	std::cout << s1.add_string(s2) << std::endl;
 
-	s1.insert(0, "asdf");
+	s1.insert(1, "asdf");
 	s1.printstr();
+	std::cout << s1.find(1, "sd") << std::endl << std::endl;
 	s1.erase(0, 4);
 	s1.printstr();
 
