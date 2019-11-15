@@ -31,8 +31,15 @@ public:
 	Complex operator*(const char*);
 	Complex operator/(const char*);
 
+
 	void println() const;
 };
+
+Complex operator+(const Complex& a, const Complex& b){
+	Complex temp(a);
+	return temp.operator+(b);
+}
+
 
 Complex::Complex(double real, double img)
 	: real(real), img(img){}
