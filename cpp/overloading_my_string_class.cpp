@@ -62,6 +62,8 @@ public:
 	MyString& operator=(const MyString& str);
 	MyString& operator+=(const MyString& str);
 	MyString& operator*=(const int t);
+
+	char& operator[](const int index);
 };
 
 MyString::MyString(){
@@ -141,6 +143,10 @@ MyString& MyString::operator+=(const MyString& str){
 MyString& MyString::operator*=(int t){
 	(*this) = (*this) * t;
 	return *this;
+}
+
+char& MyString::operator[](const int index){
+	return s[index];
 }
 
 int MyString::length() const{
