@@ -44,7 +44,8 @@ namespace MyExcel{
 			Node* prev;
 			double s;
 
-			Node(Node* prev, double s) : prev(prev), s(s){}
+			Node(Node* p
+					rev, double s) : prev(prev), s(s){}
 		};
 
 		Node* current;
@@ -57,6 +58,47 @@ namespace MyExcel{
 		double pop();
 		bool is_empty();
 		~NumStack();
+	};
+
+	class Cell{
+	protected:
+		int x, y;
+		Table* table;
+
+		string data;
+	
+	public:
+		virtual string stringify();
+		virtual int to_numeric();
+
+		Cell(string, int, int, Table*);
+	};
+
+	class Table{
+	protected:
+		int max_row_size, max_col_size;
+
+		Cell*** data_table;
+
+	public:
+		Table(int, int);
+		~Table();
+
+		void reg_cell(Cell*, int, int);
+		int to_numeric(const string&);
+		int to_numeric(int, int);
+		string stringify(const string&);
+		string stringify(int, int);
+
+		virtual string print_table() = 0;
+	};
+
+	class TxtTable : public Table{
+		string repeat_char(int n, char c);
+		string col_num_to_str(int);
+	public:
+		TxtTable(int, int);
+		string print_table();
 	};
 }
 #endif
