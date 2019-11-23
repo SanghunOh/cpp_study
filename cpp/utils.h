@@ -65,13 +65,12 @@ namespace MyExcel{
 		int x, y;
 		Table* table;
 
-		string data;
-	
 	public:
-		virtual string stringify();
-		virtual int to_numeric();
+		virtual string stringify() = 0;
+		virtual int to_numeric() = 0;
 
 		Cell(string, int, int, Table*);
+		Cell(int, int, Table*);
 	};
 
 	class Table{
@@ -100,6 +99,37 @@ namespace MyExcel{
 		TxtTable(int, int);
 		string print_table();
 	};
+
+	class StringCell : public Cell{
+		string data;
+
+	public:
+		string stringify();
+		int to_numeric();
+
+		StringCell(string, int, int, Table*);
+	};
+
+	class NumberCell : public Cell{
+		int data;
+	
+	public:
+		string stringify();
+		int to_numeric();
+
+		NumberCell(int, int, int, Table*);
+	};
+
+	class DateCell : public Cell{
+		time_t data;
+
+	public:
+		string stringify();
+		int to_numeric();
+
+		DateCell(string, int, int, Table*);
+	};
+
 }
 #endif
 

@@ -277,4 +277,7 @@ namespace MyExcel{
 		return s;
 	}
 
+
+	Cell::Ce
+
 }
