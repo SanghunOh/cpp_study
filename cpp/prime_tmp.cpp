@@ -12,7 +12,7 @@ struct cal<N, 2>{
 
 template <>
 struct cal<2, 1>{
-	const static bool result = false;
+	const static bool result = true;
 };
 
 template <int N>
