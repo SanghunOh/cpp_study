@@ -1,6 +1,6 @@
 #include	<iostream>
-#include	<vector>
 #include	<string>
+#include	<vector>
 #include	<algorithm>
 #include	<functional>
 
@@ -23,14 +23,15 @@ int main(){
 	vec.push_back(3);
 	vec.push_back(4);
 
-	std::vector<int> vec2(6, 0);
+	std::vector<int>::iterator current = vec.begin();
 
-	print(vec.begin(), vec.end());
-	print(vec2.begin(), vec2.end());
+	while(true){
+		current = std::find_if(current, vec.end(), [](int i) { return i % 3 == 2; });
+		if(current == vec.end())
+			break;
+		std::cout << *current << std::endl;
+		current++;
+	}
 
-	std::transform(vec.begin(), vec.end(), vec2.begin(), [](int i) { return i+1; });
-
-	std::cout << std::endl;
-	print(vec.begin(), vec.end());
-	print(vec2.begin(), vec2.end());
+	return 0;
 }

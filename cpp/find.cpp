@@ -1,6 +1,5 @@
 #include	<iostream>
 #include	<vector>
-#include	<string>
 #include	<algorithm>
 #include	<functional>
 
@@ -23,14 +22,9 @@ int main(){
 	vec.push_back(3);
 	vec.push_back(4);
 
-	std::vector<int> vec2(6, 0);
+	std::vector<int>::iterator result = std::find(vec.begin(), vec.end(), 3);
 
-	print(vec.begin(), vec.end());
-	print(vec2.begin(), vec2.end());
+	std::cout << std::distance(vec.begin(), result) +1 << std::endl;
 
-	std::transform(vec.begin(), vec.end(), vec2.begin(), [](int i) { return i+1; });
-
-	std::cout << std::endl;
-	print(vec.begin(), vec.end());
-	print(vec2.begin(), vec2.end());
+	return 0;
 }
