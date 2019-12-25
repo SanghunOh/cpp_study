@@ -12,4 +12,11 @@ public:
 	void ShowPosition() const;
 };
 
+template <typename T>
+Point<T>::Point(T x=0, T y=0) : xpos(x), ypos(y){}
+
+template <typename T>
+void Point<T>::ShowPosition() const {
+	std::cout << "[" << xpos << ", " << ypos << "]" <<std::endl;
+}
 #endif

@@ -46,3 +46,5 @@ template <typename T>
 int BoundCheckArray<T>::GetArrLen() const{
 	return len;
 }
+
+#endif
